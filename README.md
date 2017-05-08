@@ -52,7 +52,7 @@ services:
             condition: on-failure
             
     nginx:
-      image: nginx2:latest
+      image: davinbao/nginx:latest
       volumes:
         - /xmisp/dms/www/domain-manage-system:/home/www
       ports:
