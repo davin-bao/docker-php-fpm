@@ -29,7 +29,7 @@ services:
             condition: on-failure
             
     php:
-      image: php2:latest
+      image: davinbao/php-fpm:latest
       ports:
         - "9000:9000"
       networks:
