@@ -35,7 +35,7 @@ services:
       networks:
         - dms
       volumes:
-        - /xmisp/dms/www/domain-manage-system:/home/www
+        - /var/www:/home/www
       deploy:
         mode: global
         resources:
@@ -54,7 +54,7 @@ services:
     nginx:
       image: davinbao/nginx:latest
       volumes:
-        - /xmisp/dms/www/domain-manage-system:/home/www
+        - /var/www:/home/www
       ports:
         - "80:80"
       networks:
