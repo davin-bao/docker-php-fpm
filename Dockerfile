@@ -75,9 +75,6 @@ COPY php-fpm.conf /usr/local/etc
 
 COPY ./php-fpm.d/* /usr/local/etc/php-fpm.d/
 
-RUN set -xe \
-    && sed -i 's/;error_log = log\/php-fpm.log/error_log = $LOGDIR\/php-fpm\/error\.log/g' /usr/local/etc/php-fpm.conf
-
 ADD run.sh /
 RUN chmod +x /run.sh
 
