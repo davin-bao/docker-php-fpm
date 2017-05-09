@@ -10,41 +10,27 @@ if [ ! -d $CONFDIR/php-fpm.d ] ; then
   mkdir -p $CONFDIR/php-fpm.d
 fi
 
-if [ -f $CONFDIR/php.ini ] ; then
-  cp $CONFDIR/php.ini /usr/local/etc/php/php.ini
-  chown root:root /usr/local/etc/php/php.ini
-else
-  cp /usr/local/etc/php/php.ini $CONFDIR/php.ini
-fi
+function moveConf()
+{
+  if [ -f $CONFDIR/$1 ] ; then
+  
+    if [ -f $2/$1 ] ; then
+      rm -rf $2/$1
+    fi
 
-if [ -f $CONFDIR/php-fpm.conf ] ; then
-  cp $CONFDIR/php-fpm.conf /usr/local/etc/php-fpm.conf
-  chown root:root /usr/local/etc/php-fpm.conf
-else
-  cp /usr/local/etc/php-fpm.conf $CONFDIR/php-fpm.conf
-fi
+    cp -rf $CONFDIR/$1 $2/$1
+    chown root:root $2/$1
+  else
+    cp -rf $2/$1 $CONFDIR/$1
+  fi
+}
 
-if [ -f $CONFDIR/php-fpm.d/www.conf ] ; then
-  cp $CONFDIR/php-fpm.d/www.conf /usr/local/etc/php-fpm.d/www.conf
-  chown root:root /usr/local/etc/php-fpm.d/www.conf
-else
-  cp /usr/local/etc/php-fpm.d/www.conf $CONFDIR/php-fpm.d/www.conf
-fi
-
-if [ -f $CONFDIR/php-fpm.d/docker.conf ] ; then
-  cp $CONFDIR/php-fpm.d/docker.conf /usr/local/etc/php-fpm.d/docker.conf
-  chown root:root /usr/local/etc/php-fpm.d/docker.conf
-else
-  cp /usr/local/etc/php-fpm.d/docker.conf $CONFDIR/php-fpm.d/docker.conf
-fi
-
-if [ -f $CONFDIR/php-fpm.d/zz-docker.conf ] ; then
-  cp $CONFDIR/php-fpm.d/zz-docker.conf /usr/local/etc/php-fpm.d/zz-docker.conf
-  chown root:root /usr/local/etc/php-fpm.d/zz-docker.conf
-else
-  cp /usr/local/etc/php-fpm.d/zz-docker.conf $CONFDIR/php-fpm.d/zz-docker.conf
-fi
-
+$(moveConf php.ini /usr/local/etc/php);
+$(moveConf fastcgi.conf /usr/local/etc);
+$(moveConf php-fpm.conf /usr/local/etc);
+$(moveConf php-fpm.d/www.conf /usr/local/etc);
+$(moveConf php-fpm.d/docker.conf /usr/local/etc);
+$(moveConf php-fpm.d/zz-docker.conf /usr/local/etc);
 
 # start php-fpm
 php-fpm
