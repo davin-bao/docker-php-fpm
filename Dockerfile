@@ -40,22 +40,22 @@ RUN set -xe docker-php-ext-configure mysqli \
 
 RUN set -xe \
     && docker-php-ext-install bcmath \
-    calendar \
-    gd \
-    gettext \
-    pdo_mysql \
-    mysqli \
-    pcntl \
-    reflection \
-    shmop \
-    SimpleXML \
-    soap \
-    sockets \
-    sysvsem \
-    wddx \
-    xmlrpc \
-    zip \
-    opcache
+    && docker-php-ext-install calendar \
+    && docker-php-ext-install gd \
+    && docker-php-ext-install gettext \
+    && docker-php-ext-install pdo_mysql \
+    && docker-php-ext-install mysqli \
+    && docker-php-ext-install pcntl \
+    && docker-php-ext-install reflection \
+    && docker-php-ext-install shmop \
+    && docker-php-ext-install SimpleXML \
+    && docker-php-ext-install soap \
+    && docker-php-ext-install sockets \
+    && docker-php-ext-install sysvsem \
+    && docker-php-ext-install wddx \
+    && docker-php-ext-install xmlrpc \
+    && docker-php-ext-install zip \
+    && docker-php-ext-install opcache
 
 RUN set -xe docker-php-source delete
 
