@@ -38,24 +38,23 @@ RUN set -xe docker-php-ext-configure pdo_mysql \
 RUN set -xe docker-php-ext-configure mysqli \
     --with-mysqli=mysqlnd
 
-RUN set -xe \
-    && docker-php-ext-install bcmath \
-    && docker-php-ext-install calendar \
-    && docker-php-ext-install gd \
-    && docker-php-ext-install gettext \
-    && docker-php-ext-install pdo_mysql \
-    && docker-php-ext-install mysqli \
-    && docker-php-ext-install pcntl \
-    && docker-php-ext-install reflection \
-    && docker-php-ext-install shmop \
-    && docker-php-ext-install SimpleXML \
-    && docker-php-ext-install soap \
-    && docker-php-ext-install sockets \
-    && docker-php-ext-install sysvsem \
-    && docker-php-ext-install wddx \
-    && docker-php-ext-install xmlrpc \
-    && docker-php-ext-install zip \
-    && docker-php-ext-install opcache
+RUN set -xe docker-php-ext-install bcmath
+RUN set -xe docker-php-ext-install calendar
+RUN set -xe docker-php-ext-install gd
+RUN set -xe docker-php-ext-install gettext
+RUN set -xe docker-php-ext-install pdo_mysql
+RUN set -xe docker-php-ext-install mysqli
+RUN set -xe docker-php-ext-install pcntl
+RUN set -xe docker-php-ext-install reflection
+RUN set -xe docker-php-ext-install shmop
+RUN set -xe docker-php-ext-install SimpleXML
+RUN set -xe docker-php-ext-install soap
+RUN set -xe docker-php-ext-install sockets
+RUN set -xe docker-php-ext-install sysvsem
+RUN set -xe docker-php-ext-install wddx
+RUN set -xe docker-php-ext-install xmlrpc
+RUN set -xe docker-php-ext-install zip
+RUN set -xe docker-php-ext-install opcache
 
 RUN set -xe docker-php-source delete
 
