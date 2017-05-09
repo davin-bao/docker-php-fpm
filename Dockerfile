@@ -55,6 +55,7 @@ RUN set -xe docker-php-source delete
 COPY composer /usr/bin
 
 RUN set -xe \
+        && chmod +x /usr/bin/composer \
 	&& composer -v
 
 WORKDIR /var/www/html
