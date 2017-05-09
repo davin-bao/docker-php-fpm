@@ -10,6 +10,13 @@ if [ ! -d $CONFDIR/php-fpm.d ] ; then
   mkdir -p $CONFDIR/php-fpm.d
 fi
 
+if [ -f $CONFDIR/php.ini ] ; then
+  cp $CONFDIR/php.ini /usr/local/etc/php/php.ini
+  chown root:root /usr/local/etc/php/php.ini
+else
+  cp /usr/local/etc/php/php.ini $CONFDIR/php.ini
+fi
+
 if [ -f $CONFDIR/php-fpm.conf ] ; then
   cp $CONFDIR/php-fpm.conf /usr/local/etc/php-fpm.conf
   chown root:root /usr/local/etc/php-fpm.conf
