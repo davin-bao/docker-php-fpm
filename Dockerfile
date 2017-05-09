@@ -27,34 +27,35 @@ RUN set -xe \
     && echo "${TIMEZONE}" > /etc/timezone \
     apk del tzdata
 
-RUN set -xe apk add libmcrypt-dev \
-    && docker-php-ext-configure mcrypt --with-mcrypt \
-    && docker-php-ext-install mcrypt
+# RUN set -xe apk add libmcrypt-dev && docker-php-ext-configure mcrypt --with-mcrypt && docker-php-ext-install mcrypt
 
 RUN set -xe docker-php-ext-configure gd \
     --with-jpeg-dir=/usr/include --with-png-dir=/usr/include --with-webp-dir=/usr/include --with-freetype-dir=/usr/include
 
-RUN set -xe docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd && \
-    docker-php-ext-install pdo_mysql
-RUN set -xe docker-php-ext-configure mysqli --with-mysqli=mysqlnd && \
-    docker-php-ext-install mysqli
+RUN set -xe docker-php-ext-configure pdo_mysql \
+    --with-pdo-mysql=mysqlnd
 
-RUN set -xe docker-php-ext-install bcmath
-RUN set -xe docker-php-ext-install calendar
-RUN set -xe docker-php-ext-install gd
-RUN set -xe docker-php-ext-install gettext
-RUN set -xe docker-php-ext-install mysqli
-RUN set -xe docker-php-ext-install pcntl
-RUN set -xe docker-php-ext-install reflection
-RUN set -xe docker-php-ext-install shmop
-RUN set -xe docker-php-ext-install SimpleXML
-RUN set -xe docker-php-ext-install soap
-RUN set -xe docker-php-ext-install sockets
-RUN set -xe docker-php-ext-install sysvsem
-RUN set -xe docker-php-ext-install wddx
-RUN set -xe docker-php-ext-install xmlrpc
-RUN set -xe docker-php-ext-install zip
-RUN set -xe docker-php-ext-install opcache
+RUN set -xe docker-php-ext-configure mysqli \
+    --with-mysqli=mysqlnd
+
+RUN set -xe \
+    && docker-php-ext-install bcmath \
+    calendar \
+    gd \
+    gettext \
+    pdo_mysql \
+    mysqli \
+    pcntl \
+    reflection \
+    shmop \
+    SimpleXML \
+    soap \
+    sockets \
+    sysvsem \
+    wddx \
+    xmlrpc \
+    zip \
+    opcache
 
 RUN set -xe docker-php-source delete
 
