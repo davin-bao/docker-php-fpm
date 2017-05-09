@@ -27,7 +27,7 @@ RUN set -xe \
     && echo "${TIMEZONE}" > /etc/timezone \
     apk del tzdata
 
-RUN set -xe apk add libmcrypt \
+RUN set -xe apk add libmcrypt-dev \
     && docker-php-ext-configure mcrypt --with-mcrypt \
     && docker-php-ext-install mcrypt
 
