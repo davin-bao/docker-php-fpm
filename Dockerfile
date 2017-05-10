@@ -14,11 +14,12 @@ RUN set -xe \
     && mkdir -p $LOGDIR
 
 #国内源
-RUN set -xe \
-    && echo https://mirror.tuna.tsinghua.edu.cn/alpine/edge/main > /etc/apk/repositories \
-    && echo http://mirrors.ustc.edu.cn/alpine/v3.3/main/ > /etc/apk/repositories \
-    && echo /etc/apk/respositories \
-    apk update
+#RUN set -xe \
+#    && echo https://mirror.tuna.tsinghua.edu.cn/alpine/edge/main > /etc/apk/repositories \
+#    && echo http://mirrors.ustc.edu.cn/alpine/v3.3/main/ > /etc/apk/repositories \
+#    && echo /etc/apk/respositories \
+#    apk update
+
 #设置时区
 ENV TIMEZONE Etc/UTC
 RUN set -xe \
