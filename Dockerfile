@@ -11,7 +11,8 @@ RUN set -x \
 
 RUN set -xe \
     && mkdir -p $CONFDIR \
-    && mkdir -p $LOGDIR
+    && mkdir -p $LOGDIR \
+    && mkdir -p /usr/include
 
 #国内源
 #RUN set -xe \
