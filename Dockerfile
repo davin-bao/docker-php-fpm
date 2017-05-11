@@ -22,21 +22,26 @@ RUN set -xe \
 
 # RUN set -xe apk add libmcrypt-dev && docker-php-ext-configure mcrypt --with-mcrypt && docker-php-ext-install mcrypt
 
-RUN set -xe docker-php-ext-configure gd \
-    --with-jpeg-dir=/usr/include --with-png-dir=/usr/include --with-webp-dir=/usr/include --with-freetype-dir=/usr/include
 
-RUN set -xe docker-php-ext-configure pdo_mysql \
-    --with-pdo-mysql=mysqlnd
 
-RUN set -xe docker-php-ext-configure mysqli \
-    --with-mysqli=mysqlnd
 
 RUN docker-php-ext-install bcmath
 RUN docker-php-ext-install calendar
+
+RUN set -xe docker-php-ext-configure gd \
+    --with-jpeg-dir=/usr/include --with-png-dir=/usr/include --with-webp-dir=/usr/include --with-freetype-dir=/usr/include
 RUN docker-php-ext-install gd
+
 RUN docker-php-ext-install gettext
+
+RUN set -xe docker-php-ext-configure pdo_mysql \
+    --with-pdo-mysql=mysqlnd
 RUN docker-php-ext-install pdo_mysql
+
+RUN set -xe docker-php-ext-configure mysqli \
+    --with-mysqli=mysqlnd
 RUN docker-php-ext-install mysqli
+
 RUN docker-php-ext-install pcntl
 RUN docker-php-ext-install reflection
 RUN docker-php-ext-install shmop
