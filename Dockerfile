@@ -12,6 +12,7 @@ RUN set -xe \
     && mkdir -p $LOGDIR
 
 RUN apt-get update && apt-get install -y \
+    bash \
     libmcrypt-dev \
     libicu-dev \
     mysql-client \
