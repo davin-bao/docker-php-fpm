@@ -31,7 +31,7 @@ RUN docker-php-ext-install calendar
 
 #RUN set -xe docker-php-ext-configure gd \
 #    --with-jpeg-dir=/usr/include --with-png-dir=/usr/include --with-webp-dir=/usr/include --with-freetype-dir=/usr/include
-RUN docker-php-ext-install gd
+#RUN docker-php-ext-install gd
 
 RUN docker-php-ext-install gettext
 
