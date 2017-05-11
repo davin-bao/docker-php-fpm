@@ -20,14 +20,6 @@ RUN set -xe \
 #    && echo /etc/apk/respositories \
 #    apk update
 
-#设置时区
-ENV TIMEZONE Etc/UTC
-RUN set -xe \
-    && apk add --update tzdata \
-    && cp /usr/share/zoneinfo/${TIMEZONE} /etc/localtime \
-    && echo "${TIMEZONE}" > /etc/timezone \
-    apk del tzdata
-
 # RUN set -xe apk add libmcrypt-dev && docker-php-ext-configure mcrypt --with-mcrypt && docker-php-ext-install mcrypt
 
 RUN set -xe docker-php-ext-configure gd \
@@ -58,6 +50,14 @@ RUN set -xe docker-php-ext-install zip
 RUN set -xe docker-php-ext-install opcache
 
 RUN set -xe docker-php-source delete
+
+#设置时区
+ENV TIMEZONE Etc/UTC
+RUN set -xe \
+    && apk add --update tzdata \
+    && cp /usr/share/zoneinfo/${TIMEZONE} /etc/localtime \
+    && echo "${TIMEZONE}" > /etc/timezone \
+    apk del tzdata
 
 COPY composer /usr/bin
 
