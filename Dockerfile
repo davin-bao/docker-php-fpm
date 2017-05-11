@@ -33,7 +33,7 @@ RUN docker-php-ext-install calendar
 #    --with-jpeg-dir=/usr/include --with-png-dir=/usr/include --with-webp-dir=/usr/include --with-freetype-dir=/usr/include
 #RUN docker-php-ext-install gd
 
-RUN docker-php-ext-install gettext
+#RUN docker-php-ext-install gettext
 
 RUN set -xe docker-php-ext-configure pdo_mysql \
     --with-pdo-mysql=mysqlnd
