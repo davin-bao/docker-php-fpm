@@ -1,4 +1,4 @@
-FROM php:7.1.4-fpm-alpine
+FROM php:7.1.4-fpm
 MAINTAINER Davin Bao <davin.bao@gmail.com>
 
 ENV CONFDIR /etc/php
@@ -21,19 +21,15 @@ RUN set -xe \
 #    && echo /etc/apk/respositories \
 #    apk update
 
-# RUN set -xe apk add libmcrypt-dev && docker-php-ext-configure mcrypt --with-mcrypt && docker-php-ext-install mcrypt
-
-
-
-
+RUN apk add libmcrypt-dev && docker-php-ext-configure mcrypt --with-mcrypt && docker-php-ext-install mcrypt
 RUN docker-php-ext-install bcmath
 RUN docker-php-ext-install calendar
 
-#RUN set -xe docker-php-ext-configure gd \
-#    --with-jpeg-dir=/usr/include --with-png-dir=/usr/include --with-webp-dir=/usr/include --with-freetype-dir=/usr/include
-#RUN docker-php-ext-install gd
+RUN set -xe docker-php-ext-configure gd \
+    --with-jpeg-dir=/usr/include --with-png-dir=/usr/include --with-webp-dir=/usr/include --with-freetype-dir=/usr/include
+RUN docker-php-ext-install gd
 
-#RUN docker-php-ext-install gettext
+RUN docker-php-ext-install gettext
 
 RUN set -xe docker-php-ext-configure pdo_mysql \
     --with-pdo-mysql=mysqlnd
