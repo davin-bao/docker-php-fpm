@@ -43,8 +43,8 @@ RUN docker-php-ext-configure gd \
     && docker-php-ext-install sysvsem \
     && docker-php-ext-install xml \
     && docker-php-ext-install xmlrpc \
-    && docker-php-ext-install zip \
-    && docker-php-source delete
+    && docker-php-ext-install zip
+RUN  docker-php-source delete
 
 # 设置时区
 RUN set -xe cp /usr/share/zoneinfo/Etc/UTC /etc/localtime
