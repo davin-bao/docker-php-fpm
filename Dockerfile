@@ -1,15 +1,9 @@
 FROM php:7.1-fpm
 MAINTAINER Davin Bao <davin.bao@gmail.com>
 
-ENV CONFDIR /etc/php
-ENV LOGDIR /var/log/php
 ENV TIMEZONE Etc/UTC
 
 RUN groupadd -g 1051 www && useradd -u 1051 -g www -s /sbin/nologin www
-
-RUN set -xe \
-    && mkdir -p $CONFDIR \
-    && mkdir -p $LOGDIR
 
 RUN apt-get update && apt-get install -y \
     bash \
@@ -57,22 +51,14 @@ RUN set -xe \
     && chmod +x /usr/bin/composer \
     && composer -v
 
-WORKDIR /var/www/html
-
-VOLUME [$CONFDIR, $LOGDIR]
-
-EXPOSE 9000
-
 COPY php.ini /usr/local/etc/php
 
 COPY php-fpm.conf /usr/local/etc
 
 COPY ./php-fpm.d/* /usr/local/etc/php-fpm.d/
 
-RUN set -xe \
-    && sed -i 's/;error_log = log\/php-fpm.log/error_log = \/var\/log\/php-fpm\/error\.log/g' /usr/local/etc/php-fpm.conf
+WORKDIR /var/www/html
 
-ADD run.sh /
-RUN chmod +x /run.sh
+VOLUME ['/usr/local/etc/']
 
-CMD ["/run.sh"]
+EXPOSE 9000
