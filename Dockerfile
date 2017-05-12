@@ -11,36 +11,40 @@ RUN set -xe \
     && mkdir -p $CONFDIR \
     && mkdir -p $LOGDIR
 
-# Install PHP extensions and PECL modules.
-RUN buildDeps=" \
-        libbz2-dev \
-        libmemcached-dev \
-        libmysqlclient-dev \
+RUN apt-get update && apt-get install -y \
+    bash \
+    libmcrypt-dev \
+    libicu-dev \
     mysql-client \
-        libsasl2-dev \
-    " \
-    runtimeDeps=" \
-        curl \
-        git \
-        libfreetype6-dev \
-        libjpeg62-turbo-dev \
-        libicu-dev \
-        libjpeg-dev \
-        libmcrypt-dev \
-        libmemcachedutil2 \
-        libpng12-dev \
-        libpq-dev \
-        libxml2 \
-        libxml2-dev \
-    " \
-    && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y $buildDeps $runtimeDeps \
-    && docker-php-ext-install  bz2 calendar iconv intl mbstring mcrypt mysqli opcache pdo_mysql pdo_pgsql pgsql zip bcmath gettext pcntl shmop sysvsem soap sockets xml xmlrpc \
-    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libpng12-dev \
+    libxml2 libxml2-dev
+
+RUN docker-php-ext-configure gd \
+        --with-gd \
+        --with-freetype-dir=/usr/include/ \
+        --with-jpeg-dir=/usr/include/ \
+        --with-png-dir=/usr/include/ \
     && docker-php-ext-install gd \
-    && pecl install memcached redis \
-    && docker-php-ext-enable memcached.so redis.so \
-    && apt-get purge -y --auto-remove $buildDeps \
-    && rm -r /var/lib/apt/lists/*
+    && docker-php-ext-install iconv \
+    && docker-php-ext-install mcrypt \
+    && docker-php-ext-install intl \
+    && docker-php-ext-install opcache \
+    && docker-php-ext-install mbstring \
+    && docker-php-ext-install gettext \
+    && docker-php-ext-install pcntl \
+    && docker-php-ext-install pdo_mysql \
+    && docker-php-ext-install soap \
+    && docker-php-ext-install sockets \
+    && docker-php-ext-install bcmath \
+    && docker-php-ext-install mysqli \
+    && docker-php-ext-install shmop \
+    && docker-php-ext-install sysvsem \
+    && docker-php-ext-install xml \
+    && docker-php-ext-install xmlrpc \
+    && docker-php-ext-install zip \
+    && docker-php-source delete
 
 # 设置时区
 RUN set -xe cp /usr/share/zoneinfo/Etc/UTC /etc/localtime
@@ -65,3 +69,8 @@ COPY ./php-fpm.d/* /usr/local/etc/php-fpm.d/
 
 RUN set -xe \
     && sed -i 's/;error_log = log\/php-fpm.log/error_log = \/var\/log\/php-fpm\/error\.log/g' /usr/local/etc/php-fpm.conf
+
+ADD run.sh /
+RUN chmod +x /run.sh
+
+CMD ["/run.sh"]
