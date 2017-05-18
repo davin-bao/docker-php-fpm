@@ -15,7 +15,8 @@ RUN apt-get update && apt-get install -y \
     libpng12-dev \
     libxml2 \
     libxml2-dev \
-    libpcre3-dev
+    libpcre3-dev \
+    git
 
 RUN docker-php-ext-configure gd \
         --with-gd \
