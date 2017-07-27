@@ -3,7 +3,7 @@ MAINTAINER Davin Bao <davin.bao@gmail.com>
 
 ENV TIMEZONE Etc/UTC
 
-RUN groupadd -g 1051 www && useradd -u 1051 -g www -s /sbin/nologin www
+RUN groupadd -g 1982 www && useradd -u 1982 -g www -s /sbin/nologin www
 
 RUN apt-get update && apt-get install -y \
     bash \
