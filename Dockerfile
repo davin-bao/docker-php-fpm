@@ -3,6 +3,9 @@ MAINTAINER Davin Bao <davin.bao@gmail.com>
 
 ENV TIMEZONE Etc/UTC
 
+RUN userdel www 
+RUN groupdel www
+
 RUN groupadd -g 1982 www && useradd -u 1982 -g www -s /sbin/nologin www
 
 RUN apt-get update && apt-get install -y \
