@@ -68,3 +68,5 @@ WORKDIR /var/www/html
 VOLUME ['/usr/local/etc/']
 
 EXPOSE 9000
+
+CMD ["php-fpm", "-c", "/usr/local/etc/php.ini", "-y", "/usr/local/etc/php-fpm.conf"]
