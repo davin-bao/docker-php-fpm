@@ -1,4 +1,4 @@
-FROM php:7.1-fpm
+FROM php:5.6-fpm
 MAINTAINER Davin Bao <davin.bao@gmail.com>
 
 ENV TIMEZONE Etc/UTC
@@ -54,8 +54,7 @@ RUN set -xe cp /usr/share/zoneinfo/Etc/UTC /etc/localtime
 COPY composer /usr/bin
 
 RUN set -xe \
-    && chmod +x /usr/bin/composer \
-    && composer -v
+    && chmod +x /usr/bin/composer
 
 COPY php.ini /usr/local/etc/php
 
