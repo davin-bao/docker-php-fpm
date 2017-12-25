@@ -54,8 +54,7 @@ RUN set -xe cp /usr/share/zoneinfo/Etc/UTC /etc/localtime
 COPY composer /usr/bin
 
 RUN set -xe \
-    && chmod +x /usr/bin/composer \
-    && composer -v
+    && chmod +x /usr/bin/composer
 
 COPY php.ini /usr/local/etc/php
 
