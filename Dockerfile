@@ -52,7 +52,7 @@ RUN docker-php-ext-configure gd \
 # 设置时区
 RUN set -xe cp /usr/share/zoneinfo/Etc/UTC /etc/localtime
 # 关闭 core 文件生成
-RUN set -xe ulimit -c 0
+RUN set -xe echo 'ulimit -c 0' >> /etc/profile
 
 COPY composer /usr/bin
 
