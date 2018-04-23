@@ -47,6 +47,7 @@ RUN docker-php-ext-configure gd \
     && docker-php-ext-install xml \
     && docker-php-ext-install xmlrpc \
     && docker-php-ext-install zip \
+    && docker-php-ext-install phpunit \
     && docker-php-source delete
 
 # 设置时区
@@ -58,6 +59,10 @@ COPY composer /usr/bin
 
 RUN set -xe \
     && chmod +x /usr/bin/composer
+	
+RUN php -r "copy('https://phar.phpunit.de/phpunit.phar','/tmp/phpunit.phar');"
+RUN chmod +x /tmp/phpunit.phar
+RUN mv /tmp/phpunit.phar /usr/local/bin/phpunit
 
 COPY php.ini /usr/local/etc/php
 
