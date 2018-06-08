@@ -31,7 +31,6 @@ RUN docker-php-ext-configure gd \
         --with-png-dir=/usr/include/ \
     && docker-php-ext-install gd \
     && docker-php-ext-install iconv \
-    && docker-php-ext-install mcrypt \
     && docker-php-ext-install intl \
     && docker-php-ext-install opcache \
     && docker-php-ext-install mbstring \
