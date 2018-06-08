@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
     mysql-client \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
-    libpng12-dev \
+    libpng-dev \
     libxml2 \
     libxml2-dev \
     libpcre3-dev \
