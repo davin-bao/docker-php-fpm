@@ -1,4 +1,4 @@
-FROM php:7.1-fpm
+FROM php:7.2.6-fpm
 MAINTAINER Davin Bao <davin.bao@gmail.com>
 
 ENV TIMEZONE Etc/UTC
