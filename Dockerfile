@@ -22,7 +22,9 @@ RUN apt-get update && apt-get install -y \
     libpcre3-dev \
     git \
     vim \
-    net-tools
+    net-tools \
+    procps \
+    telnet
 
 RUN docker-php-ext-configure gd \
         --with-gd \
