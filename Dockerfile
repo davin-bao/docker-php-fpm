@@ -25,7 +25,20 @@ RUN apt-get update && apt-get install -y \
     vim \
     net-tools \
     procps \
-    telnet
+    telnet \
+    libmemcached-dev \
+    libz-dev \
+    libpq-dev \
+    libjpeg-dev \
+    libssl-dev \
+    libkrb5-dev \
+    poppler-utils \
+    htop
+        
+RUN apk add --no-cache icu-dev imap c-client libssl1.0 libressl-dev imap-dev \
+    && docker-php-ext-configure imap --with-imap-ssl \
+    && docker-php-ext-install imap \
+    && apk del --no-cache icu-dev libressl-dev imap-dev
 
 RUN docker-php-ext-configure gd \
         --with-gd \
@@ -52,7 +65,7 @@ RUN docker-php-ext-configure gd \
     && docker-php-ext-install xmlrpc \
     && docker-php-ext-install zip \
     && docker-php-source delete
-
+    
 # 设置时区
 RUN set -xe cp /usr/share/zoneinfo/Etc/UTC /etc/localtime
 # 关闭 core 文件生成
