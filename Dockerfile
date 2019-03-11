@@ -32,8 +32,7 @@ RUN docker-php-ext-configure gd \
         --with-freetype-dir=/usr/include/ \
         --with-jpeg-dir=/usr/include/ \
         --with-png-dir=/usr/include/ \
-	--with-kerberos=/usr/ \
-	--with-imap-ssl=/usr/ \
+	--with-kerberos=/usr/include/ \
     && docker-php-ext-install gd \
     && docker-php-ext-install iconv \
     && docker-php-ext-install intl \
