@@ -20,6 +20,7 @@ RUN apt-get update && apt-get install -y \
     libxml2 \
     libxml2-dev \
     libpcre3-dev \
+    libc-client-dev \
     git \
     vim \
     net-tools \
@@ -31,6 +32,8 @@ RUN docker-php-ext-configure gd \
         --with-freetype-dir=/usr/include/ \
         --with-jpeg-dir=/usr/include/ \
         --with-png-dir=/usr/include/ \
+	--with-kerberos=/usr/ \
+	--with-imap-ssl=/usr/ \
     && docker-php-ext-install gd \
     && docker-php-ext-install iconv \
     && docker-php-ext-install intl \
