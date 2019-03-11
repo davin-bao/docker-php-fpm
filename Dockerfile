@@ -40,6 +40,7 @@ RUN docker-php-ext-configure gd \
     && docker-php-ext-install pcntl \
     && docker-php-ext-install pdo_mysql \
     && docker-php-ext-install soap \
+    && docker-php-ext-install imap \
     && docker-php-ext-install sockets \
     && docker-php-ext-install bcmath \
     && docker-php-ext-install mysqli \
