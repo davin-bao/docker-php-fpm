@@ -35,10 +35,8 @@ RUN apt-get update && apt-get install -y \
     poppler-utils \
     htop
         
-RUN apk add --no-cache icu-dev imap c-client libssl1.0 libressl-dev imap-dev \
-    && docker-php-ext-configure imap --with-imap-ssl \
-    && docker-php-ext-install imap \
-    && apk del --no-cache icu-dev libressl-dev imap-dev
+RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl && \
+    docker-php-ext-install imap
 
 RUN docker-php-ext-configure gd \
         --with-gd \
