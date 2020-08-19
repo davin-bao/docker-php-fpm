@@ -60,6 +60,8 @@ RUN docker-php-ext-configure gd \
     && docker-php-ext-install xml \
     && docker-php-ext-install xmlrpc \
     && docker-php-ext-install zip \
+    && docker-php-ext-install fileinfo \
+    && docker-php-ext-install imap \
     && docker-php-source delete
     
 # 设置时区
